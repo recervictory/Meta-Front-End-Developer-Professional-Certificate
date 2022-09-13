@@ -343,3 +343,55 @@ You do not need to have three separate state variables in this case, and instead
 In addition to the useState hook, there are other hooks that come in handy such as useContext, useMemo, useRef, etc. When you need to share logic and reuse the same logic across several components, you can extract the logic into a custom hook. Custom hooks offer flexibility and can be used for a wide range of use-cases such as form handling, animation, timers, and many more. 
 
 In this reading, you have explored hooks in detail and understand how to use the useState hook to maintain state within a component. You also understand the benefits of using hooks within a React component.
+
+### Prop Drilling
+
+As you’ve learned previously, prop drilling is a situation where you are passing data from a parent to a child component, then to a grandchild component, and so on, until it reaches a more distant component further down the component tree, where this data is required.
+
+Here is a very simple app that focuses on the process of props passing through several components.
+
+Please note, that the goal here is not to build an app that would exist in the real world. The goal of this app is to examine the practice of `prop drilling`, so that you can focus on it and understand it in isolation.
+
+Here is the code for the app:
+```
+function Main(props) { 
+  return <Header msg={props.msg} />; 
+} 
+
+function Header(props) { 
+  return ( 
+    <div style={{ border: "10px solid whitesmoke" }}> 
+      <h1>Header here</h1> 
+      <Wrapper msg={props.msg} /> 
+    </div> 
+  ); 
+} 
+
+function Wrapper(props) { 
+  return ( 
+    <div style={{ border: "10px solid lightgray" }}> 
+      <h2>Wrapper here</h2> 
+      <Button msg={props.msg} /> 
+    </div> 
+  ); 
+} 
+
+function Button(props) { 
+  return ( 
+    <div style={{ border: "20px solid orange" }}> 
+      <h3>This is the Button component</h3> 
+      <button onClick={() => alert(props.msg)}>Click me!</button> 
+    </div> 
+  ); 
+} 
+
+function App() { 
+  return ( 
+    <Main  
+      msg="I passed through the Header and the Wrapper and I reached the Button component"  
+    /> 
+  ); 
+}; 
+
+export default App;
+```
