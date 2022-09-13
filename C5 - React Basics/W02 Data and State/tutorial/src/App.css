@@ -39,3 +39,17 @@
 .read-the-docs {
   color: #888;
 }
+
+.navbar {
+  
+  display: flex;
+}
+
+.nav-item {
+
+  display: inline;
+  display: block;
+  color: #888;
+  background-color: red;
+  padding: 8px;
+}
