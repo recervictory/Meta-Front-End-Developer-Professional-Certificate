@@ -5,6 +5,7 @@ import Btn from './Btn';
 import HookUse from './HookUse';
 import RegisterForm from './RegisterForm';
 import PropDrilling from './PropDrilling';
+import FruitApp from './FruitApp';
 
 function App() {
   
@@ -15,6 +16,7 @@ function App() {
      <HookUse/>
      <RegisterForm/>
      <PropDrilling/>
+     <FruitApp />
     </div>
 
   )
