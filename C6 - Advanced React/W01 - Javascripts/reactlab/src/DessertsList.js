@@ -1,17 +1,17 @@
 function DessertsList({data}) {
   // Implement the component here.
-  const filterData = data.filter((dessert) => dessert.calories < 500);
-  const sortedData = filterData.sort((a,b) => {
-    return a.calories - b.calories;
+  const lowCaloriesDesserts = data.filter((dessert) => 
+  {return dessert.calories < 500
   })
-  const trasfomedData = sortedData.map((dessert) => {
-    const dessertText = `${dessert.name} - ${dessert.calories} cal`;
-    return <li key={dessert.name}>{dessertText}</li>
+  .sort((a,b) => {return a.calories - b.calories
+  })
+  .map((dessert) => {
+    return (<li>{dessert.name} - {dessert.calories} cal</li>)
   })
 
   return (
     <ul>
-      {trasfomedData}
+      {lowCaloriesDesserts}
     </ul>
   );
 }
