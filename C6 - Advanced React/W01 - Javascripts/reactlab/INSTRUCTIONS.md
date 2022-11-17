@@ -2,60 +2,50 @@
 
 ## Task
 
-You've learned how to create controlled components and forms in React.
-Now it's time to put that knowledge to use and create a registration form for Little Lemon Restaurant, where users are able to sign up.
+You've learned about React Context and how it allows you to define global state without passing individual props down through each component.
+One of the most common use cases for Context is to define a theme for your application. In this exercise, you'll create a light/dark theme switcher.
 
-The form layout and styling is already predefined for you. You have to add the missing pieces of code to make the form work as per the requirements.
-The form is provided in an uncontrolled fashion and contains the following inputs:
-- First Name
-- Last Name
-- Email
-- Password
-- Role
+The starter code includes all the necessary UI elements, as well as switch component to toggle the theme. Your goal is to implement the missing functionality inside `ThemeContext.js`.
+`ThemeContext` already exports a `ThemeProvider` component and a `useTheme` hook.
+At the moment, they don't do anything and return dummy values. 
 
-All the local state needed to complete this task has been already defined for you.
+![Alt text](images/image1.png)
+
+You'll need to implement both `ThemeProvider` component and `useTheme` hook inside `ThemeContext.js` file to complete this exercise.
+
+`ThemeProvider` should render a context provider component and inject as the context value an object with 2 properties: a `theme` property that is a string that can be either `light` or `dark` and a function named `toggleTheme` that allows to toggle the theme. 
+`useTheme` hook should return that context object.
 
 **Note:** Before you begin, make sure you understand how to work with the Coursera Code Lab for the [Advanced React course](https://www.coursera.org/learn/advanced-react/supplement/htaLX/working-with-labs-in-this-course).
 
-If you run `npm start` and view the app in the browser you'll notice that the starting React app works as is.
-The app outputs a sign up form with 5 different fields and a submit button.
-
-![Alt text](images/image1.png)
+If you run `npm start` and view the app in the browser, you'll notice that the starting React app works as is.
+The app outputs a simple view with a header, page and a switch widget in the top right corner to change the theme.
 
 ## Steps
 
 ### **Step 1**
 
-Open the `App.js` file.
-Convert all the elements from the form to controlled components by adding the value and onChange attributes to each input.
-Make sure the password input is obscured.
+Open the `ThemeContext.js` file.
+
+Create a `ThemeContext` object using `React.createContext()`
+
+Implement the `ThemeProvider` component. It should accept a `children` prop and return a `ThemeContext.Provider` component.
+The `ThemeContext.Provider` receives an object as its `value` prop, with a `theme` string and a `toggleTheme` function.
+
+`toggleTheme` should toggle the theme between `light` and `dark`.
 
 ### **Step 2**
 
-Show an error message if the password is less than 8 characters long and the user has interacted with the input at least once.
-The error message should be displayed below the password input as follows.
-
-![Alt text](images/image2.png)
-
-For that, a component called `PasswordErrorMessage` has been provided to you. Your goal is to implement the logic for when to show the error message.
-The password state is a special one that has an additional property called `isTouched`. This property is used to determine if the user has interacted with the input or not.
+Implement the `useTheme` hook. It should return the `theme` and `toggleTheme` values from the `ThemeContext`.
 
 ### **Step 3**
 
-Prevent the default behaviour of the form when the user clicks the submit button.
+Open the `Switch/index.js` file. Add an `onChange` prop to the input element and pass as the event handler a callback function to change the theme.
+You don’t need to use the event argument in this case.
 
 ### **Step 4**
 
-Implement the body of `getIsFormValid` function to return `true` if the form is valid and `false` otherwise. This determines the submit button state. The rules for the form to be valid are as follows:
-- The first name cannot be empty.
-- The email must be a valid email address and can't be empty. A function called `validateEmail` has been already provided for you to check if the email is valid. It returns `true` if the email is valid and `false` otherwise.
-- The password must be at least 8 characters long
-- The role must be either `individual` or `business`
+Verify that the app works as expected. You should be able to toggle the theme between light and dark.
+Notice how the background color of the page changes, as well as the color of the text.
 
-### **Step 5**
-
-Implement the body of `clearForm` function to clear the form state after a successful submission.
-
-### **Tip**
-
-React offers two focus events for form elements: `onBlur` and `onFocus`. You can check more information about them [here](https://reactjs.org/docs/events.html#focus-events).
+![Alt text](images/image2.png)
