@@ -2,39 +2,26 @@
 
 ## Task
 
-You've revised the useState hook. You've also learned about working with primitive (string) data and complex data (state stored in objects).
+You've learned how to fetch data in React.
 
-In this code lab, you'll practice updating the state stored in an object, based on the user interacting with the app.
+In this code lab, you'll practice fetching some data from the *randomuser.me* website's API.
 
-This code lab's app shows the Gift Card page of the Little Lemon Restaurant app, where a visitor initially has a Gift Card that they can use to have dinner for four.
+This code lab's app, once completed, is supposed to show a single customer's data for the Little Lemon Restaurant.
 
-The starter code shows the following information on the screen:
+The starter code shows only an `h1` heading, with the following text: "Data pending..."
 
-![Starting screen for this code lab](instruction-pics/m2l1-04-starting-screen.png)
+Your task is to complete the data fetching using the `fetch()` function and to handle the returned Promise object using the `then()` methods.
 
-In other words, the text that shows on the screen is as follows:
-* A title of "Gift Card Page",
-* The name of the recipient, that in this case, says "Customer: Jennifer Smith",
-* A descriptor of the state of the gift card, which is "Free dinner for 4 guests"
-* Body text that states, "To use your coupon, click the button below"
+In the return statement of the App component, you also need to add an h2 heading showing the customer's name and the customer's image from the data fetched from the random user API.
 
-The "Spend Gift Card" button is set up to execute a function when clicked. However, that event-handling function is empty.
+Here's an example screenshot of the completed app served in the browser.
 
-That means that when serving the app with the starter code, if you click the "Spend Gift Card" button, there will be no change on the screen.
+![Completed M2L2-06 code lab's app](instruction-pics/m2l2-06-completed.png)
 
-Your task is to complete the event-handling function for the "Spend Gift Card" button clicks, as detailed in the steps below.
-
-When the code lab is successfully completed, after the "Spend Gift Card" button is clicked, the UI should update to show the following information on the screen:
-
-![Completed click handler after the button is clicked](instruction-pics/m2l1-04-completed.png)
-
-In other words, the text that shows on the screen is as follows:
-* The title of Gift Card Page
-* The name of the recipient, that in this case, says "Customer: Jennifer Smith"
-* A descriptor of the state of the gift card, which is "Your coupon has been used", and
-* Body text that states, "Please visit our restaurant to renew your gift card"
-
-**Note:** Before you begin, make sure you understand how to work with the Coursera Code Lab for the [Advanced React course](https://www.coursera.org/learn/advanced-react/supplement/htaLX/working-with-labs-in-this-course).
+In other words, the completed app should display the following:
+1. An h1 heading with the text that reads "Customer data"
+2. An h2 heading with the text that reads, for example: "Name: Liam"
+3. An image tag showing an image returned from the fetched data
 
 ## Steps
 
@@ -42,55 +29,94 @@ In other words, the text that shows on the screen is as follows:
 
 Open the `App.js` file.
 
-Locate the `spendGiftCard()` function.
+The `App.js` starting code is as follows:
+```js
+import React from "react";
 
-Inside the `spendGiftCard()` function, invoke the `setGiftCard()` state-updating function. For now, just invoke it, without passing it any parameters or doing anything else with it.
+function App() {
+  const [user, setUser] = React.useState([]);
+
+  const fetchData = () => {
+
+  };
+
+  React.useEffect(() => {
+    fetchData();
+  }, []);
+
+  return Object.keys(user).length > 0 ? (
+    <div>
+      <h1>Customer data</h1>
+
+    </div>
+  ) : (
+    <h1>Data pending...</h1>
+  );
+}
+
+export default App;
+```
+
+Locate the `fetchData()` function.
+```js
+const fetchData = () => {
+
+};
+```
+
+Inside the `fetchData()` function's code block, execute the `fetch()` function, passing it a single string argument: `"https://randomuser.me/api/?results=1"`.
 
 ### **Step 2**
 
-Inside the `setGiftCard()` function invocation's parentheses, pass in an arrow function.
-
-This arrow function has a single parameter, named `prevState`. After the arrow, add a block of code (starting with an opening curly brace, and ending with a closing curly brace two lines below).
+Still inside the `fetchData()` function, under the `fetch()` function call, add the following piece of code:
+```js
+.then((response) => response.json())
+```
 
 ### **Step 3**
 
-In Step 2, you've added the previous state object as the `prevState` argument of the arrow function you passed to the `setGiftCard()` function.
+Continuing from the previous step, add another `then()` call, which takes an arrow function.
 
-Now you need to return a new object based on this previous state object.
-
-For now, in Step 3, you need to just return a copy of the `prevState` object.
-
-That means that you need to use the `return` keyword and a copy of the `prevState` object, using the rest operator - that is, the `...` operator.
+The passed-in arrow function should receive a `data` argument and using that `data` argument, it should invoke the `setUser()` function, with the `data` passed to it.
 
 ### **Step 4**
 
-In Step 3, you returned a copy of the `prevState` object using the rest operator.
-
-Now you need to combine this copy of the `prevState` object with those properties that you want updated.
-
-Put differently, you need to update some of the key-value pairs that already exist on the state object that were initially passed to the `useState()` function call.
-
-For now, in Step 4, update the `text` property of the state object, as follows:
+In the return statement of the App component, the starting code is as follows:
 ```js
-text: "Your coupon has been used."
+return Object.keys(user).length > 0 ? (
+    <div style={{padding: "40px"}}>
+        <h1>Customer data</h1>
+
+    </div>
+    ) : (
+    <h1>Data pending...</h1>
+);
 ```
+
+Under the `h1` heading, you need to add one line of code:
+* an `h2` heading, with the following code inside: `Name: {user.results[0].name.first}`
 
 ### **Step 5**
 
-In Step 4, you've updated the `text` property on the state object.
+In Step 4, you updated the `return` statement of the App component.
 
-In this step, you need to update the remaining properties on the state object.
+In this step, you need to add another line of code under the newly-added `h2`.
 
-You need to update the `valid` key's value to `false`.
+You need to add an `img` element, with the `src` attribute holding the following code:
+* `{user.results[0].picture.large}`
 
-You need to update the `instructions` key's value to `Please visit our restaurant to renew your gift card.`.
+Additionally, you need to add an `alt` attribute, as follows:
+```js
+alt=""
+```
+
+Remember to self-close the `img` tag.
 
 ### Conclusion
 
 Save the changes and serve the app.
 
 Verify that the completed app, once saved and served, behaves as follows:
-1. Initially, the Spend Gift Card button is showing.
-2. Once you click the Spend Gift Card button, the `text` property value's update will now display the sentence that reads "Your coupon has been used".
-3. Additionally, the `instructions` key's value update will now display the text that reads "Please visit our restaurant to renew your gift card."
-4. Finally, since the `valid` key's value was updated to `false`, the button is no longer showing.
+1. It shows a heading that reads: "Customer data"
+2. It shows a subheading, that shows a user name. For example, "Name: Ann"
+3. It shows an image of that user under the name

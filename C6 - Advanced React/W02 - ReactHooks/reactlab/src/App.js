@@ -1,48 +1,24 @@
-import { useState } from "react";
+import React from "react";
 
-export default function App() {
-  const [giftCard, setGiftCard] = useState(
-    {
-        firstName: "Jennifer",
-        lastName: "Smith",
-        text: "Free dinner for 4 guests",
-        valid: true,
-        instructions: "To use your coupon, click the button below.",
-    }
-  );
+function App() {
+  const [user, setUser] = React.useState([]);
 
-  function spendGiftCard() {
-    setGiftCard((prevState) => {
-      return {
-        ...prevState,
-        valid: false,
-        text: "Your coupon has been used.",
-        instructions: "Please visit our restaurant to renew your gift card.."
-      };
-    })
-  }
+  const fetchData = () => {
 
-  return (
-    <div style={{padding: '40px'}}>
-      <h1>
-        Gift Card Page
-      </h1>
-      <h2>
-        Customer: {giftCard.firstName} {giftCard.lastName}
-      </h2>
-      <h3>
-        {giftCard.text}
-      </h3>
-      <p>
-        {giftCard.instructions}
-      </p>
-      {
-        giftCard.valid && (
-          <button onClick={spendGiftCard}>
-            Spend Gift Card
-          </button>
-        )
-      }
+  };
+
+  React.useEffect(() => {
+    fetchData();
+  }, []);
+
+  return Object.keys(user).length > 0 ? (
+    <div style={{padding: "40px"}}>
+      <h1>Customer data</h1>
+
     </div>
+  ) : (
+    <h1>Data pending...</h1>
   );
 }
+
+export default App;
