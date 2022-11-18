@@ -2,121 +2,56 @@
 
 ## Task
 
-You've learned how to fetch data in React.
+You've learned how to code a custom hook in React.
 
-In this code lab, you'll practice fetching some data from the *randomuser.me* website's API.
+In this code lab, you'll practice writing a brand new custom hook.
 
-This code lab's app, once completed, is supposed to show a single customer's data for the Little Lemon Restaurant.
+The starter code for this app contains code that will display the day of the week within an h1 heading, for example: "Today is: Monday".
 
-The starter code shows only an `h1` heading, with the following text: "Data pending..."
+There is also a button under this heading, that reads "Get next day".
 
-Your task is to complete the data fetching using the `fetch()` function and to handle the returned Promise object using the `then()` methods.
+When a user clicks on this button, the h1 heading updates so that the message shows the next day in the sequence.
 
-In the return statement of the App component, you also need to add an h2 heading showing the customer's name and the customer's image from the data fetched from the random user API.
+Your task is to complete the custom hook named `usePrevious` so that the h1 heading shows both the current day and the previous current day before the update.
 
-Here's an example screenshot of the completed app served in the browser.
-
-![Completed M2L2-06 code lab's app](instruction-pics/m2l2-06-completed.png)
-
-In other words, the completed app should display the following:
-1. An h1 heading with the text that reads "Customer data"
-2. An h2 heading with the text that reads, for example: "Name: Liam"
-3. An image tag showing an image returned from the fetched data
+**Note:** Before you begin, make sure you understand how to work with the Coursera Code Lab for the [Advanced React course](https://www.coursera.org/learn/advanced-react/supplement/htaLX/working-with-labs-in-this-course).
 
 ## Steps
 
 ### **Step 1**
 
-Open the `App.js` file.
-
-The `App.js` starting code is as follows:
+Open the `App.js` file and locate the `usePrevious()` function as in the below code snippet.
 ```js
-import React from "react";
+function usePrevious(val) {
 
-function App() {
-  const [user, setUser] = React.useState([]);
-
-  const fetchData = () => {
-
-  };
-
-  React.useEffect(() => {
-    fetchData();
-  }, []);
-
-  return Object.keys(user).length > 0 ? (
-    <div>
-      <h1>Customer data</h1>
-
-    </div>
-  ) : (
-    <h1>Data pending...</h1>
-  );
 }
-
-export default App;
 ```
 
-Locate the `fetchData()` function.
-```js
-const fetchData = () => {
-
-};
-```
-
-Inside the `fetchData()` function's code block, execute the `fetch()` function, passing it a single string argument: `"https://randomuser.me/api/?results=1"`.
+Inside the `usePrevious()` function's code block, invoke the `useRef` hook without any arguments, and assign this invocation to a variable named `ref`, declared using the `const` keyword.
 
 ### **Step 2**
 
-Still inside the `fetchData()` function, under the `fetch()` function call, add the following piece of code:
-```js
-.then((response) => response.json())
-```
+Next, inside the `usePrevious()` function declaration, add a call to the `useEffect()` hook.
 
 ### **Step 3**
 
-Continuing from the previous step, add another `then()` call, which takes an arrow function.
+Now, pass two parameters, as an argument to the `useEffect()` call.
 
-The passed-in arrow function should receive a `data` argument and using that `data` argument, it should invoke the `setUser()` function, with the `data` passed to it.
+The first parameter should be an arrow function that doesn't accept and arguments. Inside the arrow function's body, assign the `val` value to the `current` property on the `ref` object.
+
+The second parameter is the dependency array. The dependency array should list a single variable to be tracked - namely, the `val` variable.
 
 ### **Step 4**
 
-In the return statement of the App component, the starting code is as follows:
-```js
-return Object.keys(user).length > 0 ? (
-    <div style={{padding: "40px"}}>
-        <h1>Customer data</h1>
+Add one more line to the body of the `usePrevious()` function declaration, specifying the return value of this function.
 
-    </div>
-    ) : (
-    <h1>Data pending...</h1>
-);
-```
-
-Under the `h1` heading, you need to add one line of code:
-* an `h2` heading, with the following code inside: `Name: {user.results[0].name.first}`
-
-### **Step 5**
-
-In Step 4, you updated the `return` statement of the App component.
-
-In this step, you need to add another line of code under the newly-added `h2`.
-
-You need to add an `img` element, with the `src` attribute holding the following code:
-* `{user.results[0].picture.large}`
-
-Additionally, you need to add an `alt` attribute, as follows:
-```js
-alt=""
-```
-
-Remember to self-close the `img` tag.
+The `usePrevious()` function should return the `ref.current` value.
 
 ### Conclusion
 
-Save the changes and serve the app.
+Save the changes and run the app.
 
-Verify that the completed app, once saved and served, behaves as follows:
-1. It shows a heading that reads: "Customer data"
-2. It shows a subheading, that shows a user name. For example, "Name: Ann"
-3. It shows an image of that user under the name
+Use the checklist below to verify that the completed app is behaving as required:
+1. It shows a heading that reads: "Today is: Monday"
+2. When the user clicks the "Get next day" button, this updates the heading, which now spans two lines.
+3. The first line of the updated heading now reads "Today is: Tuesday", and the second line reads "Previous work day was: Monday".
