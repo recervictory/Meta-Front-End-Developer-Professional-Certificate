@@ -6,27 +6,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Create and Test Form</title>
     <style>
-        input {
+        .form-input{
           background-color: antiquewhite;
         }
-      </style>
+        .form-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: 1px solid antiquewhite;
+            padding: 30px;
+        }
+        .form-group {
+          padding: 4px;
+        }
+        .form-button{
+          margin: 2px;
+        }
+    </style>
   </head>
   <body>
-    <div
-      align="center"
-      style="
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        border: 1px solid antiquewhite;
-        padding: 30px;
-      "
-    >
+    <div class='form-container' align="center">
       <form>
-        <div style="padding: 4px">
+        <div class='form-group'>
           <label for="username">Username </label
           ><input
+            class='form-input'
             type="text"
             id="username"
             name="username"
@@ -34,9 +39,10 @@
             minlength="2"
           />
         </div>
-        <div style="padding: 4px">
+        <div class='form-group'>
           <label for="password">Password </label
           ><input
+            class='form-input'
             type="password"
             id="password"
             name="password"
@@ -44,8 +50,8 @@
             minlength="2"
           />
         </div>
-        <button type="submit" align="center" style="margin: 2px;">Log In</button>
-        <button type="reset" align="center" style="margin-top: 5px;">Create New Account</button>
+        <button class='form-button' type="submit" align="center" >Log In</button>
+        <button class='form-button' type="reset" align="center" >Create New Account</button>
       </form>
     </div>
   </body>
