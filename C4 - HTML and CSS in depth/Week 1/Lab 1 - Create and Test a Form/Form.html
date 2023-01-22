@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create and Test Form</title>
+    <style>
+        input {
+          background-color: antiquewhite;
+        }
+      </style>
+  </head>
+  <body>
+    <div
+      align="center"
+      style="
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border: 1px solid antiquewhite;
+        padding: 30px;
+      "
+    >
+      <form>
+        <div style="padding: 4px">
+          <label for="username">Username </label
+          ><input
+            type="text"
+            id="username"
+            name="username"
+            required
+            minlength="2"
+          />
+        </div>
+        <div style="padding: 4px">
+          <label for="password">Password </label
+          ><input
+            type="password"
+            id="password"
+            name="password"
+            required
+            minlength="2"
+          />
+        </div>
+        <button type="submit" align="center" style="margin: 2px;">Log In</button>
+        <button type="reset" align="center" style="margin-top: 5px;">Create New Account</button>
+      </form>
+    </div>
+  </body>
+</html>
