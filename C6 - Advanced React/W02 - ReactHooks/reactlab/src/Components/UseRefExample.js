@@ -27,9 +27,7 @@ const UseRefExample = (props) => {
     }
   };
   return (
-    <div style={{ padding: "40px", border: `3px solid ${props.color}`, margin: "15px" }}>
-      <h1 style={{ padding: "0px" }}>{props.title} Example</h1>
-      <hr style={{border: `1px solid ${props.color}` }}/>
+    <div>
       <h2>
         Today is: {day}
         <br />
