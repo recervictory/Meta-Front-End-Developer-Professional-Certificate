@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import UseEffectExample from "./Components/UseEffectExample";
 import UseRefExample from "./Components/UseRefExample";
+import DataFetchingHookExample from "./Components/DataFetchingHookExample"
 import Section from "./layouts/Section";
 export default function App() {
   return (
@@ -11,8 +12,8 @@ export default function App() {
       <Section title="useRef" color="green">
         <UseRefExample />
       </Section>
-      <Section title="useRef" color="green">
-        <UseRefExample />
+      <Section title="Data fetching using hooks" color="lime">
+        <DataFetchingHookExample />
       </Section>
     </div>
   );
